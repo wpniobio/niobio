@@ -1,51 +1,302 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# API Doc ( Niobio )
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Criação de Usuário
+Request Type: 
 
-## About Laravel
+    POST
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Url: 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    /niobio/user/add
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+Params: 
 
-## Learning Laravel
+        'username',
+        'email',
+        'password'
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+Response:
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+         'id', ( O id do usuário )
+         'token', ( Token para acessos futuros )
+         'status = 1' ( status 1 = Ok, status 0 = fail )
 
-## Laravel Sponsors
+## Autenticação de usuário
+Request Type: 
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+    POST
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
+URL:
 
-## Contributing
+    /niobio/user/auth
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Params:
 
-## Security Vulnerabilities
+    'username',
+    'password'
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Response:
 
-## License
+    'id', ( O id do usuário )
+    'token', ( Token para acessos futuros )
+    'status = 1' ( status 1 = Ok, status 0 = fail )
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## Obtendo Notas
+Request Type: 
+
+    POST
+
+URL: 
+
+    /niobio/notas/get
+
+Params: 
+
+        'token'
+        'cnpj' CNPJ do emitente das notas
+        'dt_ini' Data inicial ( Padrão 'yyyy-mm-dd' )
+        'dt_fin' Data final ( Padrão 'yyyy-mm-dd' ) 
+
+Response: 
+
+    Objeto Json
+
+## Obtendo Regras
+Request Type: 
+
+    POST
+
+URL: 
+
+    /niobio/rules/get
+
+Params: 
+
+        'token'
+        'cnpj' CNPJ do emitente das notas
+        'dt_ini' Data inicial ( Padrão 'yyyy-mm-dd' )
+        'dt_fin' Data final ( Padrão 'yyyy-mm-dd' ) 
+
+Response: 
+
+    Objeto Json
+
+## Registrando ou Atualizando(Sobrepondo) Regra na T2
+Request Type: 
+
+    POST
+
+URL:
+
+    niobio/rule/add/t2
+
+Params:
+
+    token ,
+    info: { 
+         rule_id ( id da regra [caso a regra já exista, caso contrário enviar em branco] ),
+         rule_owner_id ( id do usuário que cadastrou a regra [ caso a regra já exista, caso contrario enviar em branco ] ) ,
+         user_id ( id do usuário que está cadastrando a regra )
+     },
+     data: { 
+        'user_id' ,
+        'ide_demi' ,
+        'ide_dhemi' ,
+        'ide_dhsaient' ,
+        'ide_hsaient' ,
+        'det_imposto_pis_pisaliq_cst' ,
+        'det_imposto_cofins_pisaliq_cst' ,
+        'natureza' ,
+        'det_prod_cean' ,
+        'det_prod_ceantrib' ,
+        'ide_cuf' ,
+        'emit_cnpj' ,
+        'infprot_chnfe' ,
+        'det_prod_xprod' ,
+        'det_prod_cprod' ,
+        'sprod' ,
+        'det_prod_ncm' ,
+        'det_prod_cfop' ,
+        'det_prod_qtrib' ,
+        'det_prod_utrib' ,
+        'det_prod_vuncom' ,
+        'valor_mercadoria' ,
+        'det_imposto_icms_icms_vbc' ,
+        'det_imposto_icms_icms_picms' ,
+        'det_imposto_icms_icms_cst' ,
+        'det_imposto_icms_icmsst_vbcstret' ,'0.00',
+        'det_imposto_icms_icmsst_cst' ,
+        'valor_icms' ,
+        'det_imposto_ipi_ipitrib_vipi' ,
+        'total_icmstot_vfrete' ,
+        'total_icmstot_vdesc' ,
+        'total_icmstot_vseg' ,
+        'total_icmstot_voutro' ,
+        'cfop_entrada' ,
+        'valor_icmsst' ,
+        'credito_glosa_antecipacao' ,
+        'valor_devolucao' ,
+        'aliq_interna_icms' ,
+        'reducao_base_calculo' ,
+        'valor_pauta' ,
+        'mva' ,
+        'reducao_base_icmsst' ,
+        'base_calculo_icmsst' ,
+        'quantidade_em_kgun' ,
+        'base_calculo_icmsst_pauta' ,
+        'antecipacao_parcial_normal' ,
+        'icmsst_recolher_normal' ,
+        'antecipacao_parcial_atst' ,
+        'icmsst_recolher_atst' ,
+        'antecipacao_parcial_simples' ,
+        'antecipacao_parcial_desconto_simples' ,
+        'icmsst_recolher_simples'
+      } 
+
+Response: 
+
+    http 200 code
+
+
+## Registrando Regra na T3
+Request Type: 
+
+    POST
+
+URL:
+
+    niobio/rule/add/t3
+
+Params:
+
+    token,
+    info: { 
+         rule_id ( id da regra [caso a regra já exista, caso contrário enviar em branco] ),
+         user_id ( id do usuário que está cadastrando a regra )
+     },
+     data: { 
+        'user_id' ,
+        'ide_demi' ,
+        'ide_dhemi' ,
+        'ide_dhsaient' ,
+        'ide_hsaient' ,
+        'det_imposto_pis_pisaliq_cst' ,
+        'det_imposto_cofins_pisaliq_cst' ,
+        'natureza' ,
+        'det_prod_cean' ,
+        'det_prod_ceantrib' ,
+        'ide_cuf' ,
+        'emit_cnpj' ,
+        'infprot_chnfe' ,
+        'det_prod_xprod' ,
+        'det_prod_cprod' ,
+        'sprod' ,
+        'det_prod_ncm' ,
+        'det_prod_cfop' ,
+        'det_prod_qtrib' ,
+        'det_prod_utrib' ,
+        'det_prod_vuncom' ,
+        'valor_mercadoria' ,
+        'det_imposto_icms_icms_vbc' ,
+        'det_imposto_icms_icms_picms' ,
+        'det_imposto_icms_icms_cst' ,
+        'det_imposto_icms_icmsst_vbcstret' ,'0.00',
+        'det_imposto_icms_icmsst_cst' ,
+        'valor_icms' ,
+        'det_imposto_ipi_ipitrib_vipi' ,
+        'total_icmstot_vfrete' ,
+        'total_icmstot_vdesc' ,
+        'total_icmstot_vseg' ,
+        'total_icmstot_voutro' ,
+        'cfop_entrada' ,
+        'valor_icmsst' ,
+        'credito_glosa_antecipacao' ,
+        'valor_devolucao' ,
+        'aliq_interna_icms' ,
+        'reducao_base_calculo' ,
+        'valor_pauta' ,
+        'mva' ,
+        'reducao_base_icmsst' ,
+        'base_calculo_icmsst' ,
+        'quantidade_em_kgun' ,
+        'base_calculo_icmsst_pauta' ,
+        'antecipacao_parcial_normal' ,
+        'icmsst_recolher_normal' ,
+        'antecipacao_parcial_atst' ,
+        'icmsst_recolher_atst' ,
+        'antecipacao_parcial_simples' ,
+        'antecipacao_parcial_desconto_simples' ,
+        'icmsst_recolher_simples'
+      } 
+
+Response: 
+
+    http 200 code
+
+## Obtendo Todas as notificações
+Request Type: 
+
+    GET
+
+Url:
+
+    'niobio/feed/all'
+
+Params:
+
+    token
+
+Response:
+
+    Json Object
+
+## Marcando Notificações como lidas
+Url:
+
+    'niobio/feed/att'
+
+Params:
+
+    'token'
+    'id' ( Id da notificação )
+
+Response:
+
+    http code 200
+
+## Obtendo Notificações novas ( não lidas )
+Request Type: 
+
+    GET
+
+Url: 
+
+    'niobio/feed/new'
+
+Params:
+    
+    'token'
+
+Response:
+
+    Json Object
+
+## Deletando Notificações
+Request Type: 
+
+    POST
+
+Url:
+
+    'niobio/feed/del'
+
+Params:
+
+    'token'
+    'id' ( id da notificação )
+
+Response:
+
+    http code 200
+
+Obs: 

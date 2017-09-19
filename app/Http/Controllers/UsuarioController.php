@@ -57,7 +57,7 @@ class UsuarioController extends Controller
                 ]
             );
 
-            return json_encode(['ID' =>  $userID,'token' => $token, 'status' => 1]);
+            return json_encode(['id' =>  $userID,'token' => $token, 'status' => 1]);
         }catch(PDOEXCEPTION $e){
             return json_encode(['message'=> $e->getMessage(), 'status' => 0]);
         }

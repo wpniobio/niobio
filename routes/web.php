@@ -26,7 +26,7 @@ Route::post('/niobio/user/auth', 'UsuarioController@auth');
 Route::post('/niobio/user/add', 'UsuarioController@addUser');
 
 // Url pra alimentação da tabela do usuário
-Route::post('/notas', 'NotasController@index');
+Route::post('/notas/get', 'NotasController@index');
 
 // Registrando ou Atualizando regras
 Route::post('/rule/add/t2', 'RegrasController@store');
@@ -42,9 +42,3 @@ Route::get('notification/get/new', 'NotificationController@readedfeed');
 
 // Deletando Notificações
 Route::delete('/notification/del', 'NotificationController@deleteNotification');
-
-// Teste
-Route::get('/testando/:id', function($id){
-    $id = json_encode($id);
-    return $id;
-});
