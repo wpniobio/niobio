@@ -26,19 +26,25 @@ Route::post('/niobio/user/auth', 'UsuarioController@auth');
 Route::post('/niobio/user/add', 'UsuarioController@addUser');
 
 // Url pra alimentação da tabela do usuário
-Route::post('/notas/get', 'NotasController@index');
+Route::post('/niobio/notas/get', 'NotasController@index');
+
+// Obtendo Regras
+Route::post('/niobio/rules/t2/get', 'NotasController@index');
 
 // Registrando ou Atualizando regras
-Route::post('/rule/add/t2', 'RegrasController@store');
+Route::post('niobio/rule/add/t2', 'RegrasController@store');
 
 // Registrando regras encerradas (T3)
-Route::post('/rule/add/t3', 'NotasController@closeCalc');
+Route::post('niobio/rule/add/t3', 'NotasController@closeCalc');
 
 // Obtendo Todas as Notificações
-Route::get('notification/get/all', 'NotificationController@index');
+Route::get('niobio/feed/all', 'NotificationController@index');
 
 // Obtendo Notificações novas ( não Lidas )
-Route::get('notification/get/new', 'NotificationController@readedfeed');
+Route::get('niobio/feed/new', 'NotificationController@readedfeed');
+
+// Marcando Notificação como Lida
+Route::post('niobio/feed/att', 'NotificationController@turnreaded');
 
 // Deletando Notificações
-Route::delete('/notification/del', 'NotificationController@deleteNotification');
+Route::delete('niobio/feed/del', 'NotificationController@deleteNotification');

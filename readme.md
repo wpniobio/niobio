@@ -68,7 +68,7 @@ Request Type:
 
 URL: 
 
-    /niobio/rules/get
+    /niobio/rules/t2/get
 
 Params: 
 
@@ -251,6 +251,10 @@ Response:
     Json Object
 
 ## Marcando Notificações como lidas
+Request Type: 
+
+    POST
+
 Url:
 
     'niobio/feed/att'
