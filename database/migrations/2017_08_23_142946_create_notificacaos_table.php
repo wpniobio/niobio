@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Carbon\Carbon;
 
-class CreateUsersTable extends Migration
+class CreateNotificacaosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('notificacaos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('email')->unique()->nullable();
-            $table->string('password');
-            $table->string('role')->default(0);
-            $table->string('token');
-            $table->rememberToken();
+            $table->string('to');
+            $table->text('message');
+            $table->string('read')->default('0');
             $table->timestamp('created_at')->default( Carbon::now()->toDateTimeString() );
             $table->timestamp('updated_at');
             //$table->timestamps();
@@ -35,6 +32,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('notificacaos');
     }
 }
