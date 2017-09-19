@@ -298,5 +298,3 @@ Params:
 Response:
 
     http code 200
-
-Obs: 
