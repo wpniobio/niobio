@@ -48,3 +48,9 @@ Route::post('niobio/feed/att', 'NotificationController@turnreaded');
 
 // Deletando Notificações
 Route::delete('niobio/feed/del', 'NotificationController@deleteNotification');
+
+// Sped contribuições
+Route::post('niobio/contribuicao/get', 'SpedContriController@contribuicao');
+
+// Sped fiscal
+Route::post('niobio/fiscal/get', 'SpedContriController@fiscal');

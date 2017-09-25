@@ -187,7 +187,7 @@ class CreateNotasTable extends Migration
                 $table->string('det_imposto_icms_icms_predbcst')->default('0.00');
                 $table->string('det_imposto_icms_icms_vbcst')->default('0.00');
                 $table->string('det_imposto_icms_icms_picmsst')->default('0.00');
-                $table->string('det_imposto_icms_icms_vicmsst')->default('0.00');
+                $table->string('det_imposto_icms_icms_vicmsst')->default('0.00');  // <<<<<<<<<<<<<<<<<<<<<<<<<<,
                 // icms2'0.00'
                 $table->string('det_imposto_icms_icms_predbc')->default('0.00');
                 // icms3'0.00'

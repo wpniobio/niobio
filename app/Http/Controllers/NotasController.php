@@ -16,6 +16,14 @@ class NotasController extends Controller
         $dt_ini = $body->all()['dt_ini'];
         $dt_fin = $body->all()['dt_fin'];
 
+        { // Verificação De token
+            $token = $body->all()['token'];
+
+            if( count(DB::table('users')->select()->where('token', $token)->get()) < 1 ){
+                return json_encode( ['message' => 'token inválido.'] );
+            }
+        }
+
         $notasFields = [
             'id',
             'ide_cuf',

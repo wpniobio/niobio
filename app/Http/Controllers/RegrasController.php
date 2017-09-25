@@ -9,7 +9,8 @@ use Carbon\Carbon;
 class RegrasController extends Controller
 {
     public function index(Request $body){
-        {
+        {// Parametros necessários
+
             // emit_cnpj
             // det_prod_cfop
             // det_imposto_icms_icms_cst
@@ -18,7 +19,17 @@ class RegrasController extends Controller
             // det_prod_cean
         }
 
-        // PRIMEIRA REGRA
+        { // Verificação De token
+            $token = $body->all()['token'];
+
+            if( count(DB::table('users')->select()->where('token', $token)->get()) < 1 ){
+                return json_encode( ['message' => 'token inválido.'] );
+            }
+        }
+
+        // ================================================= || ================================================= //
+
+        // PRIMEIRA REGRA || Caso exista alguma regra cadastrada com o ID do usuário
         $rule1 = @DB::table('tabelat2')
         ->select($t2Fields)
         ->where('emit_cnpj', '=', $body->all()['emit_cnpj'])
@@ -27,6 +38,17 @@ class RegrasController extends Controller
         ->where('ide_cuf', '=', $body->all()['ide_cuf'])
         ->where('user_id', '=', $body->all()['user_id'])
         ->where('det_prod_cean', '=', $body->all()['det_prod_cean'])->get();
+
+        if( count($rule1) <= 0 ){ // CASO Não exista regra cadastrada com o ID do usuário
+            $rule1 = @DB::table('tabelat2')
+            ->select($t2Fields)
+            ->where('emit_cnpj', '=', $body->all()['emit_cnpj'])
+            ->where('det_prod_cfop', '=', $body->all()['det_prod_cfop'])
+            ->where('det_imposto_icms_icms_cst', '=', $body->all()['det_imposto_icms_icms_cst'])
+            ->where('ide_cuf', '=', $body->all()['ide_cuf'])
+            ->where('det_prod_cean', '=', $body->all()['det_prod_cean'])
+            ->orderBy('created_at', 'desc')->get();
+        }
         
         if( count($rule1) > 0 ){
             $rule1 = json_decode(json_encode($rule1), TRUE);
@@ -34,7 +56,9 @@ class RegrasController extends Controller
             return json_encode($rule1);
         }
 
-        //  SEGUNDA REGRA
+        // ================================================= || ================================================= //
+
+        //  SEGUNDA REGRA || Caso exista alguma regra cadastrada com o ID do usuário
         $rule1 = @DB::table('tabelat2')
         ->select($t2Fields)
         ->where('emit_cnpj', '<>' , $body->all()['emit_cnpj'])
@@ -44,13 +68,26 @@ class RegrasController extends Controller
         ->where('user_id', '=', $body->all()['user_id'])
         ->where('det_prod_cean', '=', $body->all()['det_prod_cean'])->get();
 
+        if( count($rule1) <= 0 ){ // CASO Não exista regra cadastrada com o ID do usuário
+            $rule1 = @DB::table('tabelat2')
+            ->select($t2Fields)
+            ->where('emit_cnpj', '<>' , $body->all()['emit_cnpj'])
+            ->where('det_prod_cfop', '=', $body->all()['det_prod_cfop'])
+            ->where('det_imposto_icms_icms_cst', '=', $body->all()['det_imposto_icms_icms_cst'])
+            ->where('ide_cuf', '=', $body->all()['ide_cuf'])
+            ->where('det_prod_cean', '=', $body->all()['det_prod_cean'])
+            ->orderBy('created_at', 'desc')->get();
+        }
+
         if( count($rule1) > 0 ){
             $rule1 = json_decode(json_encode($rule1), TRUE);
             echo'<pre>';print_r($rule1);echo'</pre>';die;
             return json_encode($rule1);
         }
 
-        // TERCEIRA REGRA
+        // ================================================= || ================================================= // 
+ 
+        // TERCEIRA REGRA || Caso exista alguma regra cadastrada com o ID do usuário
         $rule1 = @DB::table('tabelat2')
         ->select($t2Fields)
         ->where('emit_cnpj', '<>', $body->all()['emit_cnpj'])
@@ -59,6 +96,17 @@ class RegrasController extends Controller
         ->where('ide_cuf', '=', $body->all()['ide_cuf'])
         ->where('user_id', '=', $body->all()['user_id'])
         ->where('det_prod_cean', '=', $body->all()['det_prod_cean'])->get();
+
+        if( count($rule1) <= 0 ){ // CASO Não exista regra cadastrada com o ID do usuário
+            $rule1 = @DB::table('tabelat2')
+            ->select($t2Fields)
+            ->where('emit_cnpj', '<>', $body->all()['emit_cnpj'])
+            ->where('det_prod_cfop', '<>', $body->all()['det_prod_cfop'])
+            ->where('det_imposto_icms_icms_cst', '<>', $body->all()['det_imposto_icms_icms_cst'])
+            ->where('ide_cuf', '=', $body->all()['ide_cuf'])
+            ->where('det_prod_cean', '=', $body->all()['det_prod_cean'])
+            ->orderBy('created_at', 'desc')->get();
+        }
 
         if( count($rule1) > 0 ){
             $rule1 = json_decode(json_encode($rule1), TRUE);
@@ -78,6 +126,14 @@ class RegrasController extends Controller
             //     user_id: ""
             // },
             // data: { ... }
+        }
+
+        { // Verificação De token
+            $token = $body->all()['token'];
+
+            if( count(DB::table('users')->select()->where('token', $token)->get()) < 1 ){
+                return json_encode( ['message' => 'token inválido.'] );
+            }
         }
 
 
@@ -324,12 +380,10 @@ class RegrasController extends Controller
             return http_response_code(200);
         }else{
             return json_encode( ['message' => 'Este Registro já existe no banco de dados'] );
-        }
-        
-
-        
-    
-        
-        
+        }        
     }
+
+
+
+
 }

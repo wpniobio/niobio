@@ -54,8 +54,8 @@ Params:
 
         'token'
         'cnpj' CNPJ do emitente das notas
-        'dt_ini' Data inicial ( Padrão 'yyyy-mm-dd' )
-        'dt_fin' Data final ( Padrão 'yyyy-mm-dd' ) 
+        'dt_ini' Data inicial ( Padrão 'yyyymmdd' tudo junto  )
+        'dt_fin' Data final ( Padrão 'yyyymmdd' tudo junto  ) 
 
 Response: 
 
@@ -74,8 +74,14 @@ Params:
 
         'token'
         'cnpj' CNPJ do emitente das notas
-        'dt_ini' Data inicial ( Padrão 'yyyy-mm-dd' )
-        'dt_fin' Data final ( Padrão 'yyyy-mm-dd' ) 
+        'dt_ini' Data inicial ( Padrão 'yyyymmdd' tudo junto )
+        'dt_fin' Data final ( Padrão 'yyyymmdd' tudo junto )
+        'emit_cnpj'
+        'det_prod_cfop'
+        'det_imposto_icms_icms_cst'
+        'ide_cuf'
+        'user_id'
+        'det_prod_cean'
 
 Response: 
 
@@ -302,3 +308,43 @@ Params:
 Response:
 
     http code 200
+
+## Obtendo Informações do Sped Contribuição
+
+Request Type:
+
+    POST
+
+Url:
+
+    'niobio/contribuicao/get'
+
+Params:
+        'token'
+        'cnpj' CNPJ do emitente das notas
+        'dt_ini' Data inicial ( Padrão 'yyyymmdd' tudo junto )
+        'dt_fin' Data final ( Padrão 'yyyymmdd' tudo junto )
+
+Response:
+
+    Json Object
+
+## Obtendo Informações do Sped Fiscal
+
+Request Type:
+
+    POST
+
+Url:
+
+    'niobio/fiscal/get'
+
+Params:
+    'token'
+    'cnpj' CNPJ do emitente das notas
+    'dt_ini' Data inicial ( Padrão 'yyyymmdd' tudo junto )
+    'dt_fin' Data final ( Padrão 'yyyymmdd' tudo junto )
+
+Response:
+
+    Json Object
