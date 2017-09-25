@@ -13,6 +13,14 @@ class SpedContriController extends Controller
         $fin = $body->all()['fin'];
         $type = $body->all()['type'];
 
+        { // Verificação De token
+            $token = $body->all()['token'];
+
+            if( count(DB::table('users')->select()->where('token', $token)->get()) < 1 ){
+                return json_encode( ['message' => 'token inválido.'] );
+            }
+        }
+
         $types = ['c481', 'c485', 'c170', 'a170'];
 
         if( isset( $type ) && !is_null( $type ) && !empty( $type ) && in_array( $type, $types ) ){
@@ -65,6 +73,14 @@ class SpedContriController extends Controller
         $cnpj = $body->all()['cnpj'];
         $ini = $body->all()['ini'];
         $fin = $body->all()['fin'];
+
+        { // Verificação De token
+            $token = $body->all()['token'];
+
+            if( count(DB::table('users')->select()->where('token', $token)->get()) < 1 ){
+                return json_encode( ['message' => 'token inválido.'] );
+            }
+        }
 
         foreach( $body->all() as $param ){
 
