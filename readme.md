@@ -320,6 +320,7 @@ Url:
     'niobio/contribuicao/get'
 
 Params:
+
         'token'
         'cnpj' CNPJ do emitente das notas
         'dt_ini' Data inicial ( Padrão 'yyyymmdd' tudo junto )
@@ -340,6 +341,7 @@ Url:
     'niobio/fiscal/get'
 
 Params:
+
     'token'
     'cnpj' CNPJ do emitente das notas
     'dt_ini' Data inicial ( Padrão 'yyyymmdd' tudo junto )
