@@ -378,8 +378,11 @@ class RegrasController extends Controller
             );
 
             return http_response_code(200);
+
         }else{
+
             return json_encode( ['message' => 'Este Registro já existe no banco de dados'] );
+            
         }        
     }
 

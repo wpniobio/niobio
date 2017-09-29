@@ -54,3 +54,15 @@ Route::post('niobio/contribuicao/get', 'SpedContriController@contribuicao');
 
 // Obtendo Sped fiscal
 Route::post('niobio/fiscal/get', 'SpedContriController@fiscal');
+
+// Obtendo divergências
+Route::post('niobio/divergencia/get', 'DivergenciasController@index');
+
+// Cadastrando divergências
+Route::post('niobio/divergencias/add', 'DivergenciasController@store');
+
+// Deletando divergências
+Route::delete('niobio/divergencias/del', 'DivergenciasController@delete');
+
+//Consultando situação de Inscrição Estadual
+Route::post('niobio/consultaie', 'consultaieController@checkInscricao');

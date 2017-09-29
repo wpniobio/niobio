@@ -394,3 +394,39 @@ Params:
 Response:
 
     http code 200 / Message
+
+## Deletando Divergência
+
+Request Type:
+
+    Delete
+
+Url:
+
+    'niobio/divergencia/del'
+
+Params:
+
+    'infprot_ch' ( chave da nota [que tem a divergência] a ser deletada )
+
+Response:
+
+    http code 200 / Message
+
+## Checando Inscrição Estadual
+
+Request Type:
+
+    POST
+
+Url:
+
+    'niobio/consultaie'
+
+Params:
+
+    'cnpj' ( CNPJ da empresa )
+
+Response:
+
+    'status' => 'Credenciada' / 'Descredenciada'
