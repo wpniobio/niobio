@@ -15,7 +15,6 @@ class CreateSpedsTable extends Migration
     {
         Schema::create('speds', function (Blueprint $table) {
             $table->increments('id');
-            
             // 0000
             $table->string('zero0000_cod_ver')->default('0.00');
             $table->string('zero0000_dt_ini')->default('0.00');

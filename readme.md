@@ -350,3 +350,44 @@ Params:
 Response:
 
     Json Object
+
+## Obtendo uma divergência
+
+Request Type:
+
+    POST
+
+Url: 
+
+    'niobio/divergencia/get'
+
+Params:
+    {
+        'cnpj', ( Cnpj da empresa ) 
+        'ini', ( Data inicial de emissao )
+        'fin', ( Data final de emissao )
+    }
+
+Response:
+
+    Json Object
+
+## Cadastrando uma divergência
+
+Request Type:
+
+    POST
+
+Url:
+
+    'niobio/divergencia/add'
+
+Params:
+
+    {
+        'ini', ( Data inicial )
+        'fin', ( Data final de emissao )
+        'infprot_ch', ( Chave da nota em questão )
+        'divergencia_completa', ( json com as divergências )
+    }
+
