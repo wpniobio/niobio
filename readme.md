@@ -391,3 +391,6 @@ Params:
         'divergencia_completa', ( json com as divergências )
     }
 
+Response:
+
+    http code 200 / Message
